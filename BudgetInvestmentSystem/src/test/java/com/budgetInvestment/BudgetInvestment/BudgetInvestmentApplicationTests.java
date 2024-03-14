@@ -1,10 +1,10 @@
-package com.budgetInestment.BudgetInvestmentSystem;
+package com.budgetInvestment.BudgetInvestment;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class BudgetInvestmentSystemApplicationTests {
+class BudgetInvestmentApplicationTests {
 
 	@Test
 	void contextLoads() {

@@ -1,13 +1,13 @@
-package com.budgetInestment.BudgetInvestmentSystem;
+package com.budgetInvestment.BudgetInvestment;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class BudgetInvestmentSystemApplication {
+public class BudgetInvestmentApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(BudgetInvestmentSystemApplication.class, args);
+		SpringApplication.run(BudgetInvestmentApplication.class, args);
 	}
 
 }
