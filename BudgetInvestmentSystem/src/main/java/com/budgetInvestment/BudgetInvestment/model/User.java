@@ -2,12 +2,16 @@ package com.budgetInvestment.BudgetInvestment.model;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name="users")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @OneToMany(mappedBy = "users")
+    private List<Expenses> expenses;
     @Column(nullable = false,unique = true, length = 25)
     private String userName;
     @Column(nullable = false,length = 20)
@@ -22,10 +26,14 @@ public class User {
     public User() {
     }
 
-    public User(Long id, String username, String password) {
+    public User(Long id, List<Expenses> expenses, String userName, String firstName, String lastName, String password, String email) {
         this.id = id;
-        this.userName = username;
+        this.expenses = expenses;
+        this.userName = userName;
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.password = password;
+        this.email = email;
     }
 
     public Long getId() {
@@ -82,5 +90,13 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public List<Expenses> getExpenses() {
+        return expenses;
+    }
+
+    public void setExpenses(List<Expenses> expenses) {
+        this.expenses = expenses;
     }
 }
