@@ -13,11 +13,17 @@ public class Expenses {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     @ManyToOne
+    @JoinColumn(nullable = false)
     private User users;
+    @Column(nullable = false)
     private double expenses;
     @Column(nullable = false, length = 50)
     private String infoExpenses;
+
+
+    private String descprition;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Column(nullable = false)
     private Date date;
 
     public Expenses(long id, User users, double expenses, String infoExpenses, Date date) {

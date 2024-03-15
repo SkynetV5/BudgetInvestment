@@ -12,6 +12,12 @@ public class User {
     private Long id;
     @OneToMany(mappedBy = "users")
     private List<Expenses> expenses;
+
+    @OneToMany(mappedBy = "users")
+    private List<Savings> savings;
+
+    @OneToMany(mappedBy = "users")
+    private List<Deposits> deposits;
     @Column(nullable = false,unique = true, length = 25)
     private String userName;
     @Column(nullable = false,length = 20)
@@ -26,9 +32,11 @@ public class User {
     public User() {
     }
 
-    public User(Long id, List<Expenses> expenses, String userName, String firstName, String lastName, String password, String email) {
+    public User(Long id, List<Expenses> expenses, List<Savings> savings, List<Deposits> deposits, String userName, String firstName, String lastName, String password, String email) {
         this.id = id;
         this.expenses = expenses;
+        this.savings = savings;
+        this.deposits = deposits;
         this.userName = userName;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -98,5 +106,21 @@ public class User {
 
     public void setExpenses(List<Expenses> expenses) {
         this.expenses = expenses;
+    }
+
+    public List<Savings> getSavings() {
+        return savings;
+    }
+
+    public void setSavings(List<Savings> savings) {
+        this.savings = savings;
+    }
+
+    public List<Deposits> getDeposits() {
+        return deposits;
+    }
+
+    public void setDeposits(List<Deposits> deposits) {
+        this.deposits = deposits;
     }
 }
