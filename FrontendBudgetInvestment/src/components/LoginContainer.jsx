@@ -1,5 +1,6 @@
 import Label from "./Label"
 import Button from "./Button"
+import { Link } from "react-router-dom"
 
 export default function LoginContainer(){
 
@@ -10,7 +11,7 @@ export default function LoginContainer(){
                 <input type="email"/> <br></br>
                 <Label>Hasło</Label><br></br>
                 <input type="password"/><br></br>
-                <Button classed={"button-register"}> Zarejestruj się  </Button>
+                <Link to='/register'><Button classed={"button-register"}> Zarejestruj się  </Button></Link>
                 <Button classed={"button-login"}> Zaloguj się </Button>
             </form>
             <a> Nie pamiętasz hasła ?</a>
