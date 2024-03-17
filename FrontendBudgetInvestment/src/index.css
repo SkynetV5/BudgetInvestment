@@ -1,6 +1,6 @@
 body{
   background-color: #091758;
-  background-image: url("/public/rose-petals.svg");
+  background-image: url("/rose-petals.svg");
   background-attachment: fixed;
   background-size: cover;
   font-family: "Tilt Neon", sans-serif;
@@ -18,6 +18,11 @@ body{
   width: 600px;
   height: 200px;
   margin-bottom: 10px;
+  text-align: center;
+}
+
+#header img{
+  width: 120px;
 }
 
 #header h1{
