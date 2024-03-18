@@ -20,17 +20,18 @@ public class Expenses {
     @Column(nullable = false, length = 50)
     private String infoExpenses;
 
-
-    private String descprition;
+    private String description;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(nullable = false)
     private Date date;
 
-    public Expenses(long id, User users, double expenses, String infoExpenses, Date date) {
+
+    public Expenses(long id, User users, double expenses, String infoExpenses, String description, Date date) {
         this.id = id;
         this.users = users;
         this.expenses = expenses;
         this.infoExpenses = infoExpenses;
+        this.description = description;
         this.date = date;
     }
 
@@ -75,5 +76,13 @@ public class Expenses {
 
     public void setDate(Date date) {
         this.date = date;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

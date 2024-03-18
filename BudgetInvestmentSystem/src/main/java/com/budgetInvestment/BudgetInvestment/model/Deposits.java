@@ -49,11 +49,11 @@ public class Deposits {
         this.id = id;
     }
 
-    public User getUser() {
+    public User getUsers() {
         return users;
     }
 
-    public void setUser(User users) {
+    public void setUsers(User users) {
         this.users = users;
     }
 
