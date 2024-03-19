@@ -22,4 +22,9 @@ public class ExpensesServiceImpl implements ExpensesService{
     public List<Expenses> getAllExpenses() {
         return expensesRepository.findAll();
     }
+
+//    @Override
+//    public List<Expenses> getExpensesForUser(Long users) {
+//        return expensesRepository.findByUserId(users);
+//    }
 }

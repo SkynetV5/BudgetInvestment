@@ -24,4 +24,9 @@ public class ExpensesController {
     public List<Expenses> getAllExpenses(){
         return expensesService.getAllExpenses();
     }
+
+//    @GetMapping("/users/{users}/expenses")
+//    public List<Expenses> getExpensesForUser(@PathVariable Long users){
+//        return expensesService.getExpensesForUser(users);
+//    }
 }

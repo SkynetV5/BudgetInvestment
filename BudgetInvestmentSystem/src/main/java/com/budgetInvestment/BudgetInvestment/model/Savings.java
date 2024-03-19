@@ -22,6 +22,11 @@ public class Savings {
     @Column(nullable = false)
     private double savings;
 
+    @Column(nullable = false)
+    private boolean addSavings;
+
+    @Column(nullable = false)
+    private boolean removeSavings;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(nullable = false)
     private Date date;
@@ -29,10 +34,12 @@ public class Savings {
     public Savings() {
     }
 
-    public Savings(long id, User users, double savings, Date date) {
+    public Savings(long id, User users, double savings, boolean addSavings, boolean removeSavings, Date date) {
         this.id = id;
         this.users = users;
         this.savings = savings;
+        this.addSavings = addSavings;
+        this.removeSavings = removeSavings;
         this.date = date;
     }
 
@@ -66,5 +73,21 @@ public class Savings {
 
     public void setUsers(User users) {
         this.users = users;
+    }
+
+    public boolean isAddSavings() {
+        return addSavings;
+    }
+
+    public void setAddSavings(boolean addSavings) {
+        this.addSavings = addSavings;
+    }
+
+    public boolean isRemoveSavings() {
+        return removeSavings;
+    }
+
+    public void setRemoveSavings(boolean removeSavings) {
+        this.removeSavings = removeSavings;
     }
 }

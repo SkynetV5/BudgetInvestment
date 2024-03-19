@@ -8,4 +8,6 @@ public interface ExpensesService {
     public Expenses saveExpenses(Expenses expenses);
 
     public List<Expenses> getAllExpenses();
+
+//    public List<Expenses> getExpensesForUser(Long users);
 }
