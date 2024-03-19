@@ -1,5 +1,6 @@
 package com.budgetInvestment.BudgetInvestment.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -15,6 +16,7 @@ public class Savings {
 
     @ManyToOne
     @JoinColumn(nullable = false)
+    @JsonIgnore
     private User users;
 
     @Column(nullable = false)

@@ -5,6 +5,8 @@ import com.budgetInvestment.BudgetInvestment.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/users")
 public class UserController {
@@ -16,5 +18,11 @@ public class UserController {
         userService.saveUser(user);
         return "Nowy uzytkownik zostal dodany!";
     }
+
+    @GetMapping("/getAll")
+    public List<User> getAllUsers(){
+        return userService.getAllUsers();
+    }
+
 
 }

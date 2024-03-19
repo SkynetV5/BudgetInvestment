@@ -5,6 +5,8 @@ import com.budgetInvestment.BudgetInvestment.repository.ExpensesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ExpensesServiceImpl implements ExpensesService{
 
@@ -14,5 +16,10 @@ public class ExpensesServiceImpl implements ExpensesService{
     @Override
     public Expenses saveExpenses(Expenses expenses) {
         return expensesRepository.save(expenses);
+    }
+
+    @Override
+    public List<Expenses> getAllExpenses() {
+        return expensesRepository.findAll();
     }
 }

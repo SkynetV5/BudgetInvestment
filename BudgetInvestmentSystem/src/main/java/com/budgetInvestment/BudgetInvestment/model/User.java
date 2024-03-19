@@ -1,5 +1,6 @@
 package com.budgetInvestment.BudgetInvestment.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -10,13 +11,17 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @OneToMany(mappedBy = "users")
+    @JsonIgnore
     private List<Expenses> expenses;
 
     @OneToMany(mappedBy = "users")
+    @JsonIgnore
     private List<Savings> savings;
 
     @OneToMany(mappedBy = "users")
+    @JsonIgnore
     private List<Deposits> deposits;
     @Column(nullable = false,unique = true, length = 25)
     private String userName;

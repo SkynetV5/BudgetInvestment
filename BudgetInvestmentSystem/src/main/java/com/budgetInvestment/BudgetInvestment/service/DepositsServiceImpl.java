@@ -5,6 +5,8 @@ import com.budgetInvestment.BudgetInvestment.repository.DepositsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class DepositsServiceImpl implements DepositsService{
 
@@ -14,5 +16,10 @@ public class DepositsServiceImpl implements DepositsService{
     @Override
     public Deposits saveDeposits(Deposits deposits) {
         return depositsRepository.save(deposits);
+    }
+
+    @Override
+    public List<Deposits> getAllDeposits() {
+        return depositsRepository.findAll();
     }
 }
