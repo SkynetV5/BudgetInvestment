@@ -1,7 +1,11 @@
+import Header from "../components/Header"
+import RegisterContainer from "../components/RegisterContainer"
+
 function Register(){
     return (
         <>
-            <h1>Register Page</h1>
+            <Header />
+            <RegisterContainer/>
         </>
     )
 }

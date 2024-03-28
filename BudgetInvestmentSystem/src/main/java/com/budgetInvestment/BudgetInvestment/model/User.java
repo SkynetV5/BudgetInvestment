@@ -12,7 +12,7 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToMany(mappedBy = "users")
+    @OneToMany(mappedBy = "user")
     @JsonIgnore
     private List<Expenses> expenses;
 

@@ -16,8 +16,14 @@ public class ExpensesController {
 
     @PostMapping("/add")
     public String add(@RequestBody Expenses expenses){
-        expensesService.saveExpenses(expenses);
-        return "Nowy wydatek zostal dodany!";
+        try{
+            expensesService.saveExpenses(expenses);
+            return "Nowy wydatek zostal dodany!";
+        } catch (Exception e){
+            System.out.println(e);
+            return "Błąd";
+        }
+
     }
 
     @GetMapping("/getAll")
@@ -25,8 +31,15 @@ public class ExpensesController {
         return expensesService.getAllExpenses();
     }
 
-//    @GetMapping("/users/{users}/expenses")
-//    public List<Expenses> getExpensesForUser(@PathVariable Long users){
-//        return expensesService.getExpensesForUser(users);
-//    }
+    @GetMapping("/{userId}")
+    public List<Expenses> getExpensesForUser(@PathVariable Long userId) {
+        try {
+            return expensesService.getExpensesForUserById(userId);
+        } catch (Exception e){
+            System.out.println(e);
+            return null;
+        }
+
+
+    }
 }

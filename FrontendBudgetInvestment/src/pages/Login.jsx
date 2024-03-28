@@ -5,10 +5,7 @@ function Login(){
         return(
             <>
                 <Header/>
-                <LoginContainer>
-
-                </LoginContainer>
-        
+                <LoginContainer />
              </>
         )
 }

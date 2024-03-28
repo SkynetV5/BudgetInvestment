@@ -5,7 +5,6 @@ import jakarta.persistence.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
-import java.util.List;
 
 @Entity
 @Table(name="expenses")
@@ -15,8 +14,7 @@ public class Expenses {
     private long id;
     @ManyToOne
     @JoinColumn(nullable = false)
-    @JsonIgnore
-    private User users;
+    private User user;
     @Column(nullable = false)
     private double expenses;
     @Column(nullable = false, length = 50)
@@ -28,9 +26,9 @@ public class Expenses {
     private Date date;
 
 
-    public Expenses(long id, User users, double expenses, String infoExpenses, String description, Date date) {
+    public Expenses(long id, User user, double expenses, String infoExpenses, String description, Date date) {
         this.id = id;
-        this.users = users;
+        this.user = user;
         this.expenses = expenses;
         this.infoExpenses = infoExpenses;
         this.description = description;
@@ -48,12 +46,12 @@ public class Expenses {
         this.id = id;
     }
 
-    public User getUsers() {
-        return users;
+    public User getUser() {
+        return user;
     }
 
-    public void setUsers(User users) {
-        this.users = users;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public double getExpenses() {

@@ -16,7 +16,6 @@ public class Deposits {
 
     @ManyToOne
     @JoinColumn(nullable = false)
-    @JsonIgnore
     private User users;
 
     @Column(nullable = false)
