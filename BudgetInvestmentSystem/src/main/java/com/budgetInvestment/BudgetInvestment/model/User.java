@@ -16,11 +16,11 @@ public class User {
     @JsonIgnore
     private List<Expenses> expenses;
 
-    @OneToMany(mappedBy = "users")
+    @OneToMany(mappedBy = "user")
     @JsonIgnore
     private List<Savings> savings;
 
-    @OneToMany(mappedBy = "users")
+    @OneToMany(mappedBy = "user")
     @JsonIgnore
     private List<Deposits> deposits;
     @Column(nullable = false,unique = true, length = 25)

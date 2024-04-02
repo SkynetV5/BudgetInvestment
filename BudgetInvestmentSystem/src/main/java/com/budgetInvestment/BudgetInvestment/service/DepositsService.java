@@ -10,4 +10,5 @@ public interface DepositsService {
 
     public List<Deposits> getAllDeposits();
 
+    public List<Deposits> getDepositsForUserById(Long userId);
 }

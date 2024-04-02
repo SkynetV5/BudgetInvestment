@@ -17,12 +17,32 @@ public class DepositsController {
 
     @PostMapping("/add")
     public String add(@RequestBody Deposits deposits){
-        depositsService.saveDeposits(deposits);
-        return "Dodano nowy przelew!";
+        try {
+            depositsService.saveDeposits(deposits);
+            return "Dodano nowy przelew!";
+        } catch (Exception e){
+            System.out.println(e);
+            return "Błąd dodania przelewu! Spróbuj ponownie później";
+        }
     }
 
     @GetMapping("/getAll")
     public List<Deposits> getAllDeposists(){
-        return depositsService.getAllDeposits();
+        try {
+            return depositsService.getAllDeposits();
+        } catch( Exception e){
+            System.out.println(e);
+            return null;
+        }
+    }
+
+    @GetMapping("/{userId}")
+    public List<Deposits> getDepositsForUser(@PathVariable Long userId){
+        try{
+            return depositsService.getDepositsForUserById(userId);
+        } catch (Exception e){
+            System.out.println(e);
+            return null;
+        }
     }
 }

@@ -21,4 +21,9 @@ public class SavingsServiceImpl implements SavingsService{
     public List<Savings> getAllSavings() {
         return savingsRepository.findAll();
     }
+
+    @Override
+    public List<Savings> getSavingForUserById(Long userId) {
+        return savingsRepository.findSavingsByUserId(userId);
+    }
 }

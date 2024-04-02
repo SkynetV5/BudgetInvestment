@@ -1,6 +1,5 @@
 package com.budgetInvestment.BudgetInvestment.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -16,15 +15,15 @@ public class Savings {
 
     @ManyToOne
     @JoinColumn(nullable = false)
-    private User users;
+    private User user;
 
     @Column(nullable = false)
     private double savings;
 
-    @Column(nullable = false)
+    @Column(nullable = false, columnDefinition = "TINYINT", length = 1)
     private boolean addSavings;
 
-    @Column(nullable = false)
+    @Column(nullable = false, columnDefinition = "TINYINT", length = 1)
     private boolean removeSavings;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(nullable = false)
@@ -33,9 +32,9 @@ public class Savings {
     public Savings() {
     }
 
-    public Savings(long id, User users, double savings, boolean addSavings, boolean removeSavings, Date date) {
+    public Savings(long id, User user, double savings, boolean addSavings, boolean removeSavings, Date date) {
         this.id = id;
-        this.users = users;
+        this.user = user;
         this.savings = savings;
         this.addSavings = addSavings;
         this.removeSavings = removeSavings;
@@ -66,12 +65,12 @@ public class Savings {
         this.date = date;
     }
 
-    public User getUsers() {
-        return users;
+    public User getUser() {
+        return user;
     }
 
-    public void setUsers(User users) {
-        this.users = users;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public boolean isAddSavings() {

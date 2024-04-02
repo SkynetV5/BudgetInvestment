@@ -22,4 +22,9 @@ public class DepositsServiceImpl implements DepositsService{
     public List<Deposits> getAllDeposits() {
         return depositsRepository.findAll();
     }
+
+    @Override
+    public List<Deposits> getDepositsForUserById(Long userId) {
+        return depositsRepository.findDepositsByUserId(userId);
+    }
 }

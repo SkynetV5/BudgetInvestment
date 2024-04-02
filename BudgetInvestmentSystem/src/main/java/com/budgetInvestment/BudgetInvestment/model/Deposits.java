@@ -1,6 +1,5 @@
 package com.budgetInvestment.BudgetInvestment.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -16,7 +15,7 @@ public class Deposits {
 
     @ManyToOne
     @JoinColumn(nullable = false)
-    private User users;
+    private User user;
 
     @Column(nullable = false)
     private double deposits;
@@ -30,9 +29,9 @@ public class Deposits {
     @Column(nullable = false)
     private Date date;
 
-    public Deposits(long id, User users, double deposits, String infoDeposits, String description, Date date) {
+    public Deposits(long id, User user, double deposits, String infoDeposits, String description, Date date) {
         this.id = id;
-        this.users = users;
+        this.user = user;
         this.deposits = deposits;
         this.infoDeposits = infoDeposits;
         this.description = description;
@@ -50,12 +49,12 @@ public class Deposits {
         this.id = id;
     }
 
-    public User getUsers() {
-        return users;
+    public User getUser() {
+        return user;
     }
 
-    public void setUsers(User users) {
-        this.users = users;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public double getDeposits() {

@@ -21,14 +21,20 @@ public class ExpensesController {
             return "Nowy wydatek zostal dodany!";
         } catch (Exception e){
             System.out.println(e);
-            return "Błąd";
+            return "Błąd dodania wydatku! Spróbuj ponownie później.";
         }
 
     }
 
     @GetMapping("/getAll")
     public List<Expenses> getAllExpenses(){
-        return expensesService.getAllExpenses();
+        try{
+            return expensesService.getAllExpenses();
+        } catch (Exception e){
+            System.out.println(e);
+            return null;
+        }
+
     }
 
     @GetMapping("/{userId}")

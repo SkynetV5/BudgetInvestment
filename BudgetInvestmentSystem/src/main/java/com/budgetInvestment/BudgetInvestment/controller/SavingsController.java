@@ -17,12 +17,32 @@ public class SavingsController {
     @PostMapping("/add")
     public String add(@RequestBody Savings savings){
         savingsService.saveSavings(savings);
-        return "Dodano nowe oszczednosci!";
+        try {
+            return "Dodano nowe oszczedności!";
+        } catch (Exception e){
+            System.out.println(e);
+            return "Błąd dodania oszczędności! Spróbuj ponownie później.";
+        }
     }
 
     @GetMapping("/getAll")
     public List<Savings> getAllSavings(){
-        return savingsService.getAllSavings();
+        try {
+            return savingsService.getAllSavings();
+        } catch(Exception e){
+            System.out.println(e);
+            return null;
+        }
+    }
+
+    @GetMapping("/{userId}")
+    public List<Savings> getSavingsForUser(Long userId){
+        try {
+            return savingsService.getSavingForUserById(userId);
+        } catch (Exception e){
+            System.out.println(e);
+            return null;
+        }
     }
 
 

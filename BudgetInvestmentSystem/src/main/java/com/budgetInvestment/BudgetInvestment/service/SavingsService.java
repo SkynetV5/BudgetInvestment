@@ -8,4 +8,6 @@ public interface SavingsService {
     public Savings saveSavings(Savings savings);
 
     public List<Savings> getAllSavings();
+
+    public List<Savings> getSavingForUserById(Long userId);
 }
