@@ -9,19 +9,30 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/users")
+@CrossOrigin
 public class UserController {
     @Autowired
     private UserService userService;
 
     @PostMapping("/add")
     public String add(@RequestBody User user){
-        userService.saveUser(user);
-        return "Nowy uzytkownik zostal dodany!";
+        try {
+            userService.saveUser(user);
+            return "Nowy uzytkownik zostal dodany!";
+        }catch (Exception e){
+            System.out.println(e);
+            return "Błąd, nie udało się dodać nowego użytkownika!";
+        }
     }
 
     @GetMapping("/getAll")
     public List<User> getAllUsers(){
-        return userService.getAllUsers();
+        try {
+            return userService.getAllUsers();
+        }catch (Exception e){
+            System.out.println(e);
+            return null;
+        }
     }
 
 
