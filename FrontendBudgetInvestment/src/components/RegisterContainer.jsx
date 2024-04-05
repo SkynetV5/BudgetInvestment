@@ -2,6 +2,8 @@ import Button from "./Button";
 import Label from "./Label";
 import {useState, useEffect} from 'react';
 import bcrypt from 'bcryptjs';
+import ErrorContainer from "./ErrorContainer";
+import "../cssFiles/ErrorContainer.css";
 
 
 export default function RegisterContainer(){
@@ -13,44 +15,63 @@ export default function RegisterContainer(){
     const[noHashedpassword, setNoHashedPassword] = useState('');
     const[repeatPassword,setRepeatPassword] = useState('');
     const[users,setUsers] = useState([]);
-    
+    const[errorContainer, setErrorContainer] = useState('');
     
 
-    function handleClick(e){
+    async function handleClick(e){
         e.preventDefault();
-        if (firstName.length < 4){
-
+        if (firstName.length < 3){
+            setErrorContainer(<ErrorContainer>Imię jest za krótkie!<br></br> Imię powinno mieć przynajmniej 3 litery </ErrorContainer>)
         }
-        else if (lastName.length < 4){
-
+        else if (lastName.length < 3){
+            setErrorContainer(<ErrorContainer>Nazwisko jest za krótkie!<br></br> Nazwisko powinno mieć przynajmniej 3 litery</ErrorContainer>)
         }
         else if (userName.length < 4){
-
+            setErrorContainer(<ErrorContainer>Nazwa użytkownika jest za krótka!<br></br> Nazwa użytkownika powinno mieć przynajmniej 4 litery</ErrorContainer>)
         }
         else if (!email.includes('@')){
-
+            setErrorContainer(<ErrorContainer>Email nie jest prawidłowy!</ErrorContainer>)
         }
         else if (noHashedpassword.length < 8){
-
+            setErrorContainer(<ErrorContainer>Hasło jest za krótkie!<br></br> Hasło powinno mieć przynajmniej 8 litery</ErrorContainer>)
         } 
         else if (repeatPassword != noHashedpassword){
-
+            setErrorContainer(<ErrorContainer>Hasła nie są takie same!</ErrorContainer>)
         }
         else{
             const password = bcrypt.hashSync(noHashedpassword, 10);
             const user={firstName,lastName,userName,email,password};
             console.log(user);
-            fetch("http://localhost:8080/users/add",{
-                method: "POST",
-                headers:{"Content-Type":"application/json"},
-                body:JSON.stringify(user)
-            }).then(()=>{
-                console.log("User dodany");
-            })
+            let response;
+            try{
+                response = await fetch("http://localhost:8080/users/add",{
+                    method: "POST",
+                    headers:{"Content-Type":"application/json"},
+                    body:JSON.stringify(user)
+                }).then(()=>{
+                    console.log("User dodany");
+                    setErrorContainer('');
+                })
+            } catch (e){
+                console.log(e);
+                
+            }
+            if(response?.ok){
+                setErrorContainer('');
+            }
+            else{
+                console.log(`HTTP Response Code: ${response?.status}`)
+                if(response?.status === undefined){
+                    setErrorContainer('');
+                }else{
+                    setErrorContainer(<ErrorContainer>Coś poszło nie tak! Spróbuj ponownie później.</ErrorContainer>)
+                }
+            }
          }
          
     }
     return <>
+        {errorContainer}
         <div id="container-register">
             <form>
                 <Label>Imię</Label><br></br>
