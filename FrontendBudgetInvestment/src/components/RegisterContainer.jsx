@@ -4,7 +4,9 @@ import {useState, useEffect} from 'react';
 import bcrypt from 'bcryptjs';
 import ErrorContainer from "./ErrorContainer";
 import "../cssFiles/ErrorContainer.css";
-
+import SuccessContainer from "./SuccessContainer";
+import "../cssFiles/SuccessContainer.css";
+import { Link } from "react-router-dom"
 
 export default function RegisterContainer(){
 
@@ -16,10 +18,19 @@ export default function RegisterContainer(){
     const[repeatPassword,setRepeatPassword] = useState('');
     const[users,setUsers] = useState([]);
     const[errorContainer, setErrorContainer] = useState('');
-    
+    const[successContainer,setSuccessContainer] = useState('');
+    const[isUserAlreadyOnDataBase,setIsUserAlreadyOnDataBase] = useState(false);
+    const[isEmailAlreadyOnDataBase,setIsEmailAlreadyOnDataBase] = useState(false);
 
-    async function handleClick(e){
+    async function handleClick(e){ 
         e.preventDefault();
+        try {
+            const response = await fetch("http://localhost:8080/users/getAll");
+            const result = await response.json();
+            setUsers(result);
+          } catch (error) {
+            console.error('Błąd podczas sprawdzania użytkownika w bazie danych:', error);
+          }
         if (firstName.length < 3){
             setErrorContainer(<ErrorContainer>Imię jest za krótkie!<br></br> Imię powinno mieć przynajmniej 3 litery </ErrorContainer>)
         }
@@ -28,6 +39,12 @@ export default function RegisterContainer(){
         }
         else if (userName.length < 4){
             setErrorContainer(<ErrorContainer>Nazwa użytkownika jest za krótka!<br></br> Nazwa użytkownika powinno mieć przynajmniej 4 litery</ErrorContainer>)
+        }
+        else if(isUserAlreadyOnDataBase){
+            setErrorContainer(<ErrorContainer>Ta nazwa użytkownika jest już zajęta</ErrorContainer>)
+        }
+        else if(isEmailAlreadyOnDataBase){
+            setErrorContainer(<ErrorContainer>Ten email jest już zajęta</ErrorContainer>)
         }
         else if (!email.includes('@')){
             setErrorContainer(<ErrorContainer>Email nie jest prawidłowy!</ErrorContainer>)
@@ -63,15 +80,35 @@ export default function RegisterContainer(){
                 console.log(`HTTP Response Code: ${response?.status}`)
                 if(response?.status === undefined){
                     setErrorContainer('');
+                    setSuccessContainer(<SuccessContainer>Dodano użytkownika
+                        <br></br>
+                        <Link to="/" style={{color: "aliceblue",
+                    textDecoration: "underline"}}>Aby się zalogować klinij tutaj.</Link>
+                    </SuccessContainer>)
+                    setEmail('');
+                    setFirstName('');
+                    setLastName('');
+                    setNoHashedPassword('');
+                    setRepeatPassword('');
+                    setUserName('');
+
                 }else{
                     setErrorContainer(<ErrorContainer>Coś poszło nie tak! Spróbuj ponownie później.</ErrorContainer>)
                 }
             }
          }
-         
-    }
+    };
+    
+    useEffect(() => {
+        let isUserInDatabase = users.some(user => user.userName === userName);
+        setIsUserAlreadyOnDataBase(isUserInDatabase);
+        let isEmailInDatabase = users.some(user => user.email === email);
+        setIsEmailAlreadyOnDataBase(isEmailInDatabase);
+      }, [users, userName]);
+
     return <>
         {errorContainer}
+        {successContainer}
         <div id="container-register">
             <form>
                 <Label>Imię</Label><br></br>
