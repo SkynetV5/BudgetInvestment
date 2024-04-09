@@ -1,15 +1,18 @@
 package com.budgetInvestment.BudgetInvestment.controller;
 
 import com.budgetInvestment.BudgetInvestment.model.User;
+import com.budgetInvestment.BudgetInvestment.response.LoginResponse;
 import com.budgetInvestment.BudgetInvestment.service.UserService;
+import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/users")
-@CrossOrigin
+@CrossOrigin()
 public class UserController {
     @Autowired
     private UserService userService;
@@ -25,6 +28,15 @@ public class UserController {
         }
     }
 
+    @GetMapping("/{email}")
+    public List<User> getUserByEmail(@PathVariable String email){
+        try {
+            return userService.getUserByEmail(email);
+        } catch (Exception e){
+            return null;
+        }
+
+    }
     @GetMapping("/getAll")
     public List<User> getAllUsers(){
         try {

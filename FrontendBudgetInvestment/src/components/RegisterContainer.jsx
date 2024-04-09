@@ -21,18 +21,30 @@ export default function RegisterContainer(){
     const[successContainer,setSuccessContainer] = useState('');
     const[isUserAlreadyOnDataBase,setIsUserAlreadyOnDataBase] = useState(false);
     const[isEmailAlreadyOnDataBase,setIsEmailAlreadyOnDataBase] = useState(false);
+    const[errorBorder,setErrorBorder] = useState('');
+
+    useEffect(() => {
+        async function fetchDataUserName(){
+            try {
+                const response = await fetch("http://localhost:8080/users/getAll");
+                const result = await response.json();
+                setUsers(result);
+              } catch (error) {
+                console.error('Błąd podczas sprawdzania użytkownika w bazie danych:', error);
+              }
+        }
+        fetchDataUserName();
+      }, [userName,setUserName, email, setEmail]);
 
     async function handleClick(e){ 
         e.preventDefault();
-        try {
-            const response = await fetch("http://localhost:8080/users/getAll");
-            const result = await response.json();
-            setUsers(result);
-          } catch (error) {
-            console.error('Błąd podczas sprawdzania użytkownika w bazie danych:', error);
-          }
+        let isUserInDatabase = users.some(user => user.userName === userName);
+        setIsUserAlreadyOnDataBase(isUserInDatabase);
+        let isEmailInDatabase = users.some(user => user.email === email);
+        setIsEmailAlreadyOnDataBase(isEmailInDatabase);
         if (firstName.length < 3){
             setErrorContainer(<ErrorContainer>Imię jest za krótkie!<br></br> Imię powinno mieć przynajmniej 3 litery </ErrorContainer>)
+            setErrorBorder(' 2px solid #F94F4F')
         }
         else if (lastName.length < 3){
             setErrorContainer(<ErrorContainer>Nazwisko jest za krótkie!<br></br> Nazwisko powinno mieć przynajmniej 3 litery</ErrorContainer>)
@@ -42,6 +54,7 @@ export default function RegisterContainer(){
         }
         else if(isUserAlreadyOnDataBase){
             setErrorContainer(<ErrorContainer>Ta nazwa użytkownika jest już zajęta</ErrorContainer>)
+            setErrorBorder(' 2px solid #F94F4F')
         }
         else if(isEmailAlreadyOnDataBase){
             setErrorContainer(<ErrorContainer>Ten email jest już zajęta</ErrorContainer>)
@@ -58,7 +71,6 @@ export default function RegisterContainer(){
         else{
             const password = bcrypt.hashSync(noHashedpassword, 10);
             const user={firstName,lastName,userName,email,password};
-            console.log(user);
             let response;
             try{
                 response = await fetch("http://localhost:8080/users/add",{
@@ -99,12 +111,7 @@ export default function RegisterContainer(){
          }
     };
     
-    useEffect(() => {
-        let isUserInDatabase = users.some(user => user.userName === userName);
-        setIsUserAlreadyOnDataBase(isUserInDatabase);
-        let isEmailInDatabase = users.some(user => user.email === email);
-        setIsEmailAlreadyOnDataBase(isEmailInDatabase);
-      }, [users, userName]);
+    
 
     return <>
         {errorContainer}
@@ -112,11 +119,12 @@ export default function RegisterContainer(){
         <div id="container-register">
             <form>
                 <Label>Imię</Label><br></br>
-                <input type="text" value={firstName} onChange={(e) =>setFirstName(e.target.value)} /><br></br>
+                <input type="text" value={firstName} onChange={(e) =>setFirstName(e.target.value)}/><br></br>
                 <Label>Nazwisko</Label><br></br>
                 <input type="text" value={lastName} onChange={(e) =>setLastName(e.target.value)} /><br></br>
                 <Label>Nazwa Użytkownika</Label><br></br>
-                <input type="text" value={userName} onChange={(e) =>setUserName(e.target.value)} /><br></br>
+                
+                <input type="text" value={userName} onChange={(e) =>setUserName(e.target.value)} style={isUserAlreadyOnDataBase ? {border: errorBorder} : null}/><br></br>
                 <Label>Email</Label>
                 <input type="email" value={email} onChange={(e)=>setEmail(e.target.value)}/><br></br>
                 <Label>Hasło</Label>
