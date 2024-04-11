@@ -1,14 +1,12 @@
 package com.budgetInvestment.BudgetInvestment.controller;
 
 import com.budgetInvestment.BudgetInvestment.model.User;
-import com.budgetInvestment.BudgetInvestment.response.LoginResponse;
 import com.budgetInvestment.BudgetInvestment.service.UserService;
-import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/users")
@@ -28,7 +26,7 @@ public class UserController {
         }
     }
 
-    @GetMapping("/{email}")
+    @GetMapping("/email/{email}")
     public List<User> getUserByEmail(@PathVariable String email){
         try {
             return userService.getUserByEmail(email);
@@ -37,6 +35,27 @@ public class UserController {
         }
 
     }
+
+    @GetMapping("/userName/{userName}")
+    public List<User> getUserByUserName(@PathVariable String userName){
+        try{
+            return userService.getUserByUserName(userName);
+        } catch (Exception e){
+            System.out.println(e);
+            return null;
+        }
+    }
+
+    @GetMapping("/id/{id}")
+    public Optional<User> getUserById(@PathVariable Long id){
+        try{
+            return userService.getUserById(id);
+        } catch (Exception e){
+            System.out.println(e);
+            return null;
+        }
+    }
+
     @GetMapping("/getAll")
     public List<User> getAllUsers(){
         try {

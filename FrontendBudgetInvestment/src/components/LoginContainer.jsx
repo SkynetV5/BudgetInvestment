@@ -18,7 +18,7 @@ export default function LoginContainer(){
         if(email != ''){
         async function fetchData(){
             try {
-                const response = await fetch(`http://localhost:8080/users/${email}`);
+                const response = await fetch(`http://localhost:8080/users/email/${email}`);
                 const result = await response.json();
                 setUser(result);
             } catch (error) {
@@ -32,17 +32,26 @@ export default function LoginContainer(){
     async function handleClick(e){
         e.preventDefault();
         const password = bcrypt.hashSync(passwordLogin,10);
+        if(email != ''){
         try{
             const isPasswordCorrect =  await user.some(userPassword => bcrypt.compare(userPassword.password, password));
             if(isPasswordCorrect){
-                navigate("/dashboard")
+                sessionStorage.setItem('isLoggedIn', 'true');
+                sessionStorage.setItem('userId', user.some(userId => userId.id));
+                navigate("/dashboard");
             } 
 
         } catch(e){
                 console.log(e);
          }
+        }
     }
-
+    useEffect(() => {
+        const isLoggedIn = sessionStorage.getItem('isLoggedIn');
+        if(isLoggedIn === 'true'){
+            navigate('/dashboard');
+        }
+    }, [])
     return(
         <div id="container-login">
             <form>

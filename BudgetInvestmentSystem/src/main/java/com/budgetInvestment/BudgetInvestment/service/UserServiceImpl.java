@@ -3,7 +3,6 @@ package com.budgetInvestment.BudgetInvestment.service;
 
 import com.budgetInvestment.BudgetInvestment.model.User;
 import com.budgetInvestment.BudgetInvestment.repository.UserRepository;
-import com.budgetInvestment.BudgetInvestment.response.LoginResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,4 +29,13 @@ public class UserServiceImpl implements UserService{
         return userRepository.findByEmail(email);
     }
 
+    @Override
+    public List<User> getUserByUserName(String userName) {
+        return userRepository.findByUserName(userName);
+    }
+
+    @Override
+    public Optional<User> getUserById(Long id) {
+        return userRepository.findById(id);
+    }
 }

@@ -16,19 +16,29 @@ export default function RegisterContainer(){
     const[email,setEmail] = useState('');
     const[noHashedpassword, setNoHashedPassword] = useState('');
     const[repeatPassword,setRepeatPassword] = useState('');
-    const[users,setUsers] = useState([]);
+    const[user,setUser] = useState([]);
+    const[userEmail,setUserEmail] = useState([]);
     const[errorContainer, setErrorContainer] = useState('');
     const[successContainer,setSuccessContainer] = useState('');
     const[isUserAlreadyOnDataBase,setIsUserAlreadyOnDataBase] = useState(false);
     const[isEmailAlreadyOnDataBase,setIsEmailAlreadyOnDataBase] = useState(false);
     const[errorBorder,setErrorBorder] = useState('');
 
+    
+
     useEffect(() => {
         async function fetchDataUserName(){
             try {
-                const response = await fetch("http://localhost:8080/users/getAll");
+                if(userName != ''){
+                const response = await fetch(`http://localhost:8080/users/userName/${userName}`);
                 const result = await response.json();
-                setUsers(result);
+                setUser(result);
+                }
+                if(email != ''){
+                    const response = await fetch(`http://localhost:8080/users/userName/email/${email}`);
+                    const result = await response.json();
+                    setUserEmail(result);
+                }
               } catch (error) {
                 console.error('Błąd podczas sprawdzania użytkownika w bazie danych:', error);
               }
@@ -38,10 +48,18 @@ export default function RegisterContainer(){
 
     async function handleClick(e){ 
         e.preventDefault();
-        let isUserInDatabase = users.some(user => user.userName === userName);
-        setIsUserAlreadyOnDataBase(isUserInDatabase);
-        let isEmailInDatabase = users.some(user => user.email === email);
-        setIsEmailAlreadyOnDataBase(isEmailInDatabase);
+        if(user.length != 0 && user != ''){
+            setIsUserAlreadyOnDataBase(true);
+        }
+        else{
+            setIsUserAlreadyOnDataBase(false);
+        }
+        if(userEmail.length != 0 && email != ''){
+            setIsEmailAlreadyOnDataBase(true);
+        }
+        else{
+            setIsEmailAlreadyOnDataBase(false);
+        }
         if (firstName.length < 3){
             setErrorContainer(<ErrorContainer>Imię jest za krótkie!<br></br> Imię powinno mieć przynajmniej 3 litery </ErrorContainer>)
             setErrorBorder(' 2px solid #F94F4F')
