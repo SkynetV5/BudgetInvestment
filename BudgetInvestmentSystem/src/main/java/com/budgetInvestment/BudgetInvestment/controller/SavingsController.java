@@ -9,6 +9,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/savings")
+@CrossOrigin
 public class SavingsController {
 
     @Autowired
@@ -36,7 +37,7 @@ public class SavingsController {
     }
 
     @GetMapping("/{userId}")
-    public List<Savings> getSavingsForUser(Long userId){
+    public List<Savings> getSavingsForUser(@PathVariable Long userId){
         try {
             return savingsService.getSavingForUserById(userId);
         } catch (Exception e){

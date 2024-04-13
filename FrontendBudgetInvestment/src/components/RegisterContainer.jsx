@@ -24,7 +24,7 @@ export default function RegisterContainer(){
     const[isEmailAlreadyOnDataBase,setIsEmailAlreadyOnDataBase] = useState(false);
     const[errorBorder,setErrorBorder] = useState('');
 
-    
+
 
     useEffect(() => {
         async function fetchDataUserName(){
@@ -35,7 +35,7 @@ export default function RegisterContainer(){
                 setUser(result);
                 }
                 if(email != ''){
-                    const response = await fetch(`http://localhost:8080/users/userName/email/${email}`);
+                    const response = await fetch(`http://localhost:8080/users/email/${email}`);
                     const result = await response.json();
                     setUserEmail(result);
                 }
@@ -87,11 +87,11 @@ export default function RegisterContainer(){
             setErrorContainer(<ErrorContainer>Hasła nie są takie same!</ErrorContainer>)
         }
         else{
-            const password = bcrypt.hashSync(noHashedpassword, 10);
-            const user={firstName,lastName,userName,email,password};
+            bcrypt.hash(noHashedpassword, 10).then((hash) => {
+            const user={firstName,lastName,userName,email,password : hash};
             let response;
             try{
-                response = await fetch("http://localhost:8080/users/add",{
+                response = fetch("http://localhost:8080/users/add",{
                     method: "POST",
                     headers:{"Content-Type":"application/json"},
                     body:JSON.stringify(user)
@@ -126,6 +126,8 @@ export default function RegisterContainer(){
                     setErrorContainer(<ErrorContainer>Coś poszło nie tak! Spróbuj ponownie później.</ErrorContainer>)
                 }
             }
+            });
+            
          }
     };
     

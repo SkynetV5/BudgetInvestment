@@ -9,10 +9,9 @@ import bcrypt from 'bcryptjs';
 
 export default function LoginContainer(){
 
-    
     const[email, setEmail] = useState('');
     const[passwordLogin,setPasswordLogin] = useState('');
-    const[user,setUser] = useState('');
+    const[user,setUser] = useState([]);
     const navigate = useNavigate();
     useEffect(() => {
         if(email != ''){
@@ -31,19 +30,27 @@ export default function LoginContainer(){
 
     async function handleClick(e){
         e.preventDefault();
-        const password = bcrypt.hashSync(passwordLogin,10);
         if(email != ''){
-        try{
-            const isPasswordCorrect =  await user.some(userPassword => bcrypt.compare(userPassword.password, password));
-            if(isPasswordCorrect){
-                sessionStorage.setItem('isLoggedIn', 'true');
-                sessionStorage.setItem('userId', user.some(userId => userId.id));
-                navigate("/dashboard");
-            } 
-
-        } catch(e){
-                console.log(e);
-         }
+            try{
+                const userPassword  = user.map(userPassword => userPassword.password).toString();
+                bcrypt.compare(passwordLogin,userPassword, (err,result) => {
+                    if(result == true){
+                    sessionStorage.setItem('isLoggedIn', 'true');
+                    const userId = user.map(userId => userId.id).toString();
+                    sessionStorage.setItem('userId', userId);
+                    navigate("/dashboard");
+                    }
+                    if(err){
+                        console.log(err);
+                    }
+                })
+    
+            } catch(e){
+                    console.log(e);
+             }
+    
+        
+       
         }
     }
     useEffect(() => {

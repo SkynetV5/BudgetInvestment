@@ -10,6 +10,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/deposits")
+@CrossOrigin
 public class DepositsController {
 
     @Autowired

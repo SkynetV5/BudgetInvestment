@@ -9,6 +9,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/expenses")
+@CrossOrigin
 public class ExpensesController {
 
     @Autowired

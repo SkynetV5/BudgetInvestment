@@ -2,7 +2,9 @@ import Menu from "../components/Menu";
 import { Link, useNavigate } from "react-router-dom"
 import {useEffect, useState } from 'react'
 import DashBoardContainer from "../components/DashBoardContainer";
-import "../cssFiles/DashBoardContainer.css"
+import "../cssFiles/DashBoardContainer.css";
+import Footer from "../components/Footer";
+import "../cssFiles/Footer.css";
 
 
 function DashBoard(){
@@ -18,6 +20,7 @@ function DashBoard(){
         <> 
             <Menu/>
             <DashBoardContainer/>
+            <Footer/>
         </>
     )
 }
