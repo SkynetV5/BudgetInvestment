@@ -14,9 +14,15 @@
     width: 30%;
     height: 50px;
     display: flex;
+    align-items: center;
+    justify-content: center;
 }
 #footer #box p{
     text-align: center;
     padding-left: 30px;
     
+}
+a{
+    text-decoration: none;
+    color: antiquewhite;
 }

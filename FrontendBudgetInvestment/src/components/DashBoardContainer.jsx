@@ -2,6 +2,8 @@ import {useState, useEffect} from 'react';
 import DashBoardContainers from './DashboardContainers';
 import "../cssFiles/DashBoardContainers.css";
 import Button from './Button';
+import { FetchDataUserId, FetchDataUserExpenses, FetchDataUserDeposits, FetchDataUserSavings } from '../http.js';
+
 export default function DashBoardContainer(){
     const [userInfo,setUserInfo] = useState([]);
     const [expenses,setExpenses] = useState([]);
@@ -12,31 +14,13 @@ export default function DashBoardContainer(){
     useEffect(() =>{
         async function fetchData(){
             try{
-                const response = await fetch(`http://localhost:8080/users/id/${id}`)
-                const result = await response.json();
-                setUserInfo(result);
+                setUserInfo(await FetchDataUserId(id));
+
+                setExpenses(await FetchDataUserExpenses(id));
+
+                setDeposits(await FetchDataUserDeposits(id));
                 
-            } catch (e){
-                console.error('Błąd podczas pobierania danych:', e);
-            }
-            try{
-                const response = await fetch(`http://localhost:8080/expenses/${id}`);
-                const result = await response.json();
-                setExpenses(result);
-            }catch(e){
-                console.error(e);
-            }
-            try{
-                const response = await fetch(`http://localhost:8080/deposits/${id}`);
-                const result = await response.json();
-                setDeposits(result);
-            }catch(e){
-                console.error(e);
-            }
-            try{
-                const response = await fetch(`http://localhost:8080/savings/${id}`);
-                const result = await response.json();
-                setSavings(result);
+                setSavings(await FetchDataUserSavings(id));
             }catch(e){
                 console.error(e);
             }
@@ -90,12 +74,12 @@ export default function DashBoardContainer(){
                 <h3>Dzisiaj jest {currentlydate}.</h3>
                 <DashBoardContainers id={'amount-container'} title={'Konto'} description={'Widzisz tutaj całą wartość swojego konta.'}>
                 <div id='box'>
-                    <div style={{textAlign: 'center'}}>
-                        <br></br><br></br><br></br><br></br><Button classed={"button-login"}>Historia płatności</Button>
+                    <div>
+                        <br></br><br></br><br></br><br></br><Button classed={"button-click"}>Historia płatności</Button>
                     </div>
                     <div>
-                     <p style={{textAlign: 'right', paddingRight: '50px'}}>Suma na twoim koncie wynosi:</p>
-                        <h1 style={{textAlign: 'right', paddingRight: '50px'}}>{amount.toFixed(2)}zł</h1>
+                        <p id='amount-text'>Suma na twoim koncie wynosi:</p>
+                        <h1 id='amount'>{amount.toFixed(2)}zł</h1>
                     
                     </div>
                 </div>
@@ -104,28 +88,28 @@ export default function DashBoardContainer(){
                
                 <div id='box'>
                     <div style={{textAlign: 'center'}}>
-                        <br></br><br></br><br></br><br></br><Button classed={"button-login"}>Historia oszczędności</Button>
+                        <br></br><br></br><br></br><br></br><Button classed={"button-click"}>Historia oszczędności</Button>
                     </div>
                     <div>
-                     <p style={{textAlign: 'left', paddingLeft: '50px'}}>Suma na twoim koncie oszczędnościowym wynosi:</p>
-                        <h1 style={{textAlign: 'left', paddingLeft: '50px'}}>{savingsAmount.toFixed(2)}zł</h1>
+                     <p id='amount-text'>Suma na twoim koncie wynosi:</p>
+                        <h1 id='amount'>{savingsAmount.toFixed(2)}zł</h1>
                     
                     </div>
                 </div>
                 </DashBoardContainers>
                 <DashBoardContainers id={'add-or-remove-savings-container'} title={'Dodaj/Usuń oszczędności'} description={'Dodaj bądź usuń oszczędności'}>
                     <div>
-                    <Button classed={"button-login"}>Dodaj/Usuń Oszczędności</Button>
+                    <Button classed={"button-click"}>Dodaj/Usuń Oszczędności</Button>
                     </div>
                 </DashBoardContainers>
                 <DashBoardContainers id={'add-expenses-container'} title={'Dodaj wydatek'} description={'Dodaj nowy wydatek.'}>
                     <div>
-                    <Button classed={"button-login"}>Dodaj wydatek</Button>
+                    <Button classed={"button-click"}>Dodaj wydatek</Button>
                     </div>
                 </DashBoardContainers>
                 <DashBoardContainers id={'add-deposits-container'} title={'Dodaj przychód'} description={'Dodaj nowy przychód.'}>
                     <div>
-                    <Button classed={"button-login"}>Dodaj przychód</Button>
+                    <Button classed={"button-click"}>Dodaj przychód</Button>
                     </div>
                 </DashBoardContainers>
         </div>

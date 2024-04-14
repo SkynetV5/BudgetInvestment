@@ -3,7 +3,7 @@ import Button from "./Button"
 import { Link, useNavigate } from "react-router-dom"
 import {useEffect, useState } from 'react'
 import bcrypt from 'bcryptjs';
-
+import { FetchDataIsExistingEmail } from '../http.js';
 
 
 
@@ -17,9 +17,7 @@ export default function LoginContainer(){
         if(email != ''){
         async function fetchData(){
             try {
-                const response = await fetch(`http://localhost:8080/users/email/${email}`);
-                const result = await response.json();
-                setUser(result);
+                setUser(await FetchDataIsExistingEmail(email));
             } catch (error) {
                 console.error('Błąd podczas pobierania danych:', error);
             }

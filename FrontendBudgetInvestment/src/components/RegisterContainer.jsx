@@ -6,7 +6,8 @@ import ErrorContainer from "./ErrorContainer";
 import "../cssFiles/ErrorContainer.css";
 import SuccessContainer from "./SuccessContainer";
 import "../cssFiles/SuccessContainer.css";
-import { Link } from "react-router-dom"
+import { Link } from "react-router-dom";
+import { FetchDataIsExistingEmail, FetchDataIsExistingUser } from "../http.js"
 
 export default function RegisterContainer(){
 
@@ -25,19 +26,14 @@ export default function RegisterContainer(){
     const[errorBorder,setErrorBorder] = useState('');
 
 
-
     useEffect(() => {
         async function fetchDataUserName(){
             try {
                 if(userName != ''){
-                const response = await fetch(`http://localhost:8080/users/userName/${userName}`);
-                const result = await response.json();
-                setUser(result);
+                setUser(await FetchDataIsExistingUser(userName));
                 }
                 if(email != ''){
-                    const response = await fetch(`http://localhost:8080/users/email/${email}`);
-                    const result = await response.json();
-                    setUserEmail(result);
+                    setUserEmail(await FetchDataIsExistingEmail(email));
                 }
               } catch (error) {
                 console.error('Błąd podczas sprawdzania użytkownika w bazie danych:', error);
