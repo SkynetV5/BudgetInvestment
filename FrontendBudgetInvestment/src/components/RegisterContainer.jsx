@@ -6,7 +6,7 @@ import ErrorContainer from "./ErrorContainer";
 import "../cssFiles/ErrorContainer.css";
 import SuccessContainer from "./SuccessContainer";
 import "../cssFiles/SuccessContainer.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FetchDataIsExistingEmail, FetchDataIsExistingUser } from "../http.js"
 
 export default function RegisterContainer(){
@@ -24,7 +24,7 @@ export default function RegisterContainer(){
     const[isUserAlreadyOnDataBase,setIsUserAlreadyOnDataBase] = useState(false);
     const[isEmailAlreadyOnDataBase,setIsEmailAlreadyOnDataBase] = useState(false);
     const[errorBorder,setErrorBorder] = useState('');
-
+    const navigate = useNavigate();
 
     useEffect(() => {
         async function fetchDataUserName(){
@@ -41,6 +41,13 @@ export default function RegisterContainer(){
         }
         fetchDataUserName();
       }, [userName,setUserName, email, setEmail]);
+
+      useEffect(() => {
+        const isLoggedIn = sessionStorage.getItem('isLoggedIn');
+        if(isLoggedIn === 'true'){
+            navigate('/dashboard');
+        }
+        }, [])
 
     async function handleClick(e){ 
         e.preventDefault();
@@ -91,36 +98,32 @@ export default function RegisterContainer(){
                     method: "POST",
                     headers:{"Content-Type":"application/json"},
                     body:JSON.stringify(user)
-                }).then(()=>{
-                    console.log("User dodany");
+                });
+                if(response.ok){
                     setErrorContainer('');
-                })
-            } catch (e){
-                console.log(e);
-                
-            }
-            if(response?.ok){
-                setErrorContainer('');
-            }
-            else{
-                console.log(`HTTP Response Code: ${response?.status}`)
-                if(response?.status === undefined){
-                    setErrorContainer('');
-                    setSuccessContainer(<SuccessContainer>Dodano użytkownika
-                        <br></br>
-                        <Link to="/" style={{color: "aliceblue",
-                    textDecoration: "underline"}}>Aby się zalogować klinij tutaj.</Link>
-                    </SuccessContainer>)
-                    setEmail('');
-                    setFirstName('');
-                    setLastName('');
-                    setNoHashedPassword('');
-                    setRepeatPassword('');
-                    setUserName('');
-
-                }else{
-                    setErrorContainer(<ErrorContainer>Coś poszło nie tak! Spróbuj ponownie później.</ErrorContainer>)
                 }
+                else{
+                    if(response.status === undefined){
+                        setErrorContainer('');
+                        setSuccessContainer(<SuccessContainer>Dodano użytkownika
+                            <br></br>
+                            <Link to="/" style={{color: "aliceblue",
+                        textDecoration: "underline"}}>Aby się zalogować klinij tutaj.</Link>
+                        </SuccessContainer>)
+                        setEmail('');
+                        setFirstName('');
+                        setLastName('');
+                        setNoHashedPassword('');
+                        setRepeatPassword('');
+                        setUserName('');
+    
+                    }else{
+                        setErrorContainer(<ErrorContainer>Coś poszło nie tak! Spróbuj ponownie później.</ErrorContainer>)
+                    }
+                }
+            } catch (e){
+                setErrorContainer(<ErrorContainer>Coś poszło nie tak! Spróbuj ponownie później.</ErrorContainer>)
+                
             }
             });
             

@@ -3,6 +3,7 @@ import DashBoardContainers from './DashboardContainers';
 import "../cssFiles/DashBoardContainers.css";
 import Button from './Button';
 import { FetchDataUserId, FetchDataUserExpenses, FetchDataUserDeposits, FetchDataUserSavings } from '../http.js';
+import { Link } from 'react-router-dom';
 
 export default function DashBoardContainer(){
     const [userInfo,setUserInfo] = useState([]);
@@ -104,7 +105,7 @@ export default function DashBoardContainer(){
                 </DashBoardContainers>
                 <DashBoardContainers id={'add-expenses-container'} title={'Dodaj wydatek'} description={'Dodaj nowy wydatek.'}>
                     <div>
-                    <Button classed={"button-click"}>Dodaj wydatek</Button>
+                    <Link to='/addExpenses'><Button classed={"button-click"}>Dodaj wydatek</Button></Link>
                     </div>
                 </DashBoardContainers>
                 <DashBoardContainers id={'add-deposits-container'} title={'Dodaj przychód'} description={'Dodaj nowy przychód.'}>

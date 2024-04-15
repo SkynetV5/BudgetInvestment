@@ -5,6 +5,9 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import Login from './pages/Login'
 import Register from './pages/Register'
 import DashBoard from './pages/DashBoard'
+import AddExpenses from './pages/AddExpenses'
+import NotFoundPage from './pages/NotFoundPage'
+
 function App() {
 
 
@@ -12,7 +15,9 @@ function App() {
     [
       { path: '/', element: <Login />},
       { path: '/register', element: <Register />},
-      { path: '/dashboard', element: <DashBoard/>}
+      { path: '/dashboard', element: <DashBoard/>},
+      { path: '/addExpenses', element: <AddExpenses/>},
+      { path: '*', element: <NotFoundPage/>}
     ]
   )
   return (

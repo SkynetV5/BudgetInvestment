@@ -45,8 +45,7 @@ export default function Menu(){
             content = <div id="menu-items">
             <div><Button Click={handleClickMenuList} classed="menu-list"><img id='list' src={menuList}/></Button></div>
             <div><Link to='/dashboard'>DashBoard</Link></div>
-            <div><Link>Wydatki</Link></div>
-            <div><Link>Przychody</Link></div>
+            <div><Link>Konto</Link></div>
             <div><Link>Oszczędności</Link></div>
             <div><Link>Profil</Link></div>
             <div><Button classed="button-logout" Click={handleClickLogout}>Wyloguj</Button></div>
@@ -59,8 +58,7 @@ export default function Menu(){
     else{
         content =  <>
         <div><Link to='/dashboard'>DashBoard</Link></div>
-        <div><Link>Wydatki</Link></div>
-        <div><Link>Przychody</Link></div>
+        <div><Link>Konto</Link></div>
         <div><Link>Oszczędności</Link></div>
         <div><Link>Profil</Link></div>
         <div><Button classed="button-logout" Click={handleClickLogout}>Wyloguj</Button></div>

@@ -1,6 +1,6 @@
-export default function Label({children}){
+export default function Label({children ,id}){
     return (
-        <label>
+        <label id={id}>
             {children}
         </label>
     )

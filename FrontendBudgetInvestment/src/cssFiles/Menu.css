@@ -27,6 +27,9 @@
     text-decoration: none;
     color: #209E86;
 }
+#menu a:hover{
+    text-decoration: underline;
+}
 
 
 .button-logout{
@@ -61,7 +64,8 @@
 
     .menu-list{
         width: 100%;
-        height: 100px;
+        padding-top: 15px;
+        height: 60px;
         border: 0;
         font-size: 40px;
         background-color: antiquewhite;
@@ -76,7 +80,7 @@
 
     #menu-items{
         width: 100% !important;
-        height: 500px;
+        height: 400px;
         display: flex;
         flex-direction: column-reverse;
         margin-bottom: 50px;
