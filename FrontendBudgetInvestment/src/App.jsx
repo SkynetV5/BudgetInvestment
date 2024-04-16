@@ -7,6 +7,8 @@ import Register from './pages/Register'
 import DashBoard from './pages/DashBoard'
 import AddExpenses from './pages/AddExpenses'
 import NotFoundPage from './pages/NotFoundPage'
+import AddDeposits from './pages/AddDeposits'
+import AddRemoveSavings from './pages/AddRemoveSavings'
 
 function App() {
 
@@ -17,6 +19,8 @@ function App() {
       { path: '/register', element: <Register />},
       { path: '/dashboard', element: <DashBoard/>},
       { path: '/addExpenses', element: <AddExpenses/>},
+      { path: '/addDeposits', element: <AddDeposits/>},
+      { path: '/addRemoveSavings', element: <AddRemoveSavings/>},
       { path: '*', element: <NotFoundPage/>}
     ]
   )

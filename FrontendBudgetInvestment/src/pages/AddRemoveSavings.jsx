@@ -5,7 +5,7 @@ import Menu from "../components/Menu";
 import '../cssFiles/Add.css'
 import '../cssFiles/ErrorContainer.css';
 import { useState, useEffect } from "react";
-export default function AddExpenses(){
+export default function AddSavings(){
     const navigate = useNavigate();
     useEffect(() => {
         const isLoggedIn = sessionStorage.getItem('isLoggedIn');
@@ -17,7 +17,7 @@ export default function AddExpenses(){
     return (
         <>
             <Menu/>
-            <Add title="Dodaj wydatek" infoComponent='expense'>
+            <Add title="Dodaj/Usuń Oszczędności" infoComponent='savings'>
 
             </Add>
             <Footer/>

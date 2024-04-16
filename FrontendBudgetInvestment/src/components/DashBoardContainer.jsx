@@ -100,7 +100,7 @@ export default function DashBoardContainer(){
                 </DashBoardContainers>
                 <DashBoardContainers id={'add-or-remove-savings-container'} title={'Dodaj/Usuń oszczędności'} description={'Dodaj bądź usuń oszczędności'}>
                     <div>
-                    <Button classed={"button-click"}>Dodaj/Usuń Oszczędności</Button>
+                    <Link to='/addRemoveSavings'><Button classed={"button-click"}>Dodaj/Usuń Oszczędności</Button></Link>
                     </div>
                 </DashBoardContainers>
                 <DashBoardContainers id={'add-expenses-container'} title={'Dodaj wydatek'} description={'Dodaj nowy wydatek.'}>
@@ -110,7 +110,7 @@ export default function DashBoardContainer(){
                 </DashBoardContainers>
                 <DashBoardContainers id={'add-deposits-container'} title={'Dodaj przychód'} description={'Dodaj nowy przychód.'}>
                     <div>
-                    <Button classed={"button-click"}>Dodaj przychód</Button>
+                    <Link to='/addDeposits'><Button classed={"button-click"}>Dodaj przychód</Button></Link>
                     </div>
                 </DashBoardContainers>
         </div>
