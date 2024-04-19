@@ -17,9 +17,7 @@ export default function AddDeposits(){
     return (
         <>
             <Menu/>
-            <Add title="Dodaj przychód" infoComponent='deposit'>
-
-            </Add>
+            <Add title="Dodaj przychód" infoComponent='deposit'/>
             <Footer/>
         </>
     )

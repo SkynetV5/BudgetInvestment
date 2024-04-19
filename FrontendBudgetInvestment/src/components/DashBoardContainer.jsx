@@ -76,7 +76,7 @@ export default function DashBoardContainer(){
                 <DashBoardContainers id={'amount-container'} title={'Konto'} description={'Widzisz tutaj całą wartość swojego konta.'}>
                 <div id='box'>
                     <div>
-                        <br></br><br></br><br></br><br></br><Button classed={"button-click"}>Historia płatności</Button>
+                        <br></br><br></br><br></br><br></br><Link to='/account'><Button classed={"button-click"}>Historia płatności</Button></Link>
                     </div>
                     <div>
                         <p id='amount-text'>Suma na twoim koncie wynosi:</p>
@@ -89,7 +89,7 @@ export default function DashBoardContainer(){
                
                 <div id='box'>
                     <div style={{textAlign: 'center'}}>
-                        <br></br><br></br><br></br><br></br><Button classed={"button-click"}>Historia oszczędności</Button>
+                        <br></br><br></br><br></br><br></br><Link to='/savings'><Button classed={"button-click"}>Historia oszczędności</Button></Link>
                     </div>
                     <div>
                      <p id='amount-text'>Suma na twoim koncie wynosi:</p>

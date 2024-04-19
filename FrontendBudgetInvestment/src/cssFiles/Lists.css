@@ -1,0 +1,79 @@
+#lists{
+    width: 40%;
+    min-height: 200px;
+    background-color: antiquewhite; 
+    color: #209E86; 
+    margin-left: auto;
+    margin-right: auto;
+    text-align: left;
+    padding-bottom: 20px;
+    border-radius: 3px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px;
+    margin-bottom: 50px;
+}
+#lists h1{
+    padding-top: 20px;
+    text-align: center;
+}
+#lists #description{
+    text-align: center;
+    padding-top: 30px;
+}
+#listing{
+    margin-left: auto;
+    margin-right: auto;
+    width: 70%;
+    min-height: 200px;
+    color: #209E86;
+    display: flex;
+    flex-direction: row;
+    border-top: 1px solid #209E86;
+    align-items: center;
+    justify-content: center;
+    
+}
+#listing #data{
+    width: 50%;
+    padding-left: 50px;
+}
+#listing #payment{
+    width: 50%;
+    padding-left: 150px;
+    font-size: 20px;
+    
+}
+
+@media only screen and (max-width: 900px) {
+    #lists{
+        width: 80%;
+        min-height: 200px;
+        
+    }
+    #listing{
+        width: 90%;
+    }
+    #listing #data{
+        width: 100%;
+        padding-left: 25px;
+    }
+    
+}
+@media only screen and (min-width: 901px) and (max-width: 1100px) {
+    #lists{
+        width: 80%;
+        min-height: 200px;
+    }
+   
+    
+}
+@media only screen and (min-width: 1101px) and (max-width: 1600px) {
+    #listing{
+        width: 90%;
+    }
+    #listing #data{
+        width: 100%;
+        
+    }
+   
+    
+}

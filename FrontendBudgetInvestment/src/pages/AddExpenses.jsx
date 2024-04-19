@@ -17,9 +17,7 @@ export default function AddExpenses(){
     return (
         <>
             <Menu/>
-            <Add title="Dodaj wydatek" infoComponent='expense'>
-
-            </Add>
+            <Add title="Dodaj wydatek" infoComponent='expense'/>
             <Footer/>
         </>
     )

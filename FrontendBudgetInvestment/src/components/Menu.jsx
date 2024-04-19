@@ -13,7 +13,7 @@ export default function Menu(){
     const navigate = useNavigate();
     function handleClickLogout(){
         sessionStorage.setItem('isLoggedIn', 'false');
-        sessionStorage.setItem('userId', null);
+        sessionStorage.setItem('userId','');
         navigate("/");
     }
 
@@ -45,8 +45,8 @@ export default function Menu(){
             content = <div id="menu-items">
             <div><Button Click={handleClickMenuList} classed="menu-list"><img id='list' src={menuList}/></Button></div>
             <div><Link to='/dashboard'>DashBoard</Link></div>
-            <div><Link>Konto</Link></div>
-            <div><Link>Oszczędności</Link></div>
+            <div><Link to='/account'>Konto</Link></div>
+            <div><Link to='/savings'>Oszczędności</Link></div>
             <div><Link>Profil</Link></div>
             <div><Button classed="button-logout" Click={handleClickLogout}>Wyloguj</Button></div>
             </div>
@@ -58,8 +58,8 @@ export default function Menu(){
     else{
         content =  <>
         <div><Link to='/dashboard'>DashBoard</Link></div>
-        <div><Link>Konto</Link></div>
-        <div><Link>Oszczędności</Link></div>
+        <div><Link to='/account'>Konto</Link></div>
+        <div><Link to='/savings'>Oszczędności</Link></div>
         <div><Link>Profil</Link></div>
         <div><Button classed="button-logout" Click={handleClickLogout}>Wyloguj</Button></div>
         </>

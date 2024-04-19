@@ -107,7 +107,7 @@ export default function Add({title, infoComponent}){
                         successText = 'Usunięto oszczędności.';
                     }
                 }
-                if(!response.ok){
+                if(response?.ok){
                     setErrorContainer(<ErrorContainer>Coś poszło nie tak! Spróbuj ponownie później.</ErrorContainer>)
                     throw new Error("Failed");
                 }

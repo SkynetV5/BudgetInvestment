@@ -17,9 +17,7 @@ export default function AddSavings(){
     return (
         <>
             <Menu/>
-            <Add title="Dodaj/Usuń Oszczędności" infoComponent='savings'>
-
-            </Add>
+            <Add title="Dodaj/Usuń Oszczędności" infoComponent='savings'/>
             <Footer/>
         </>
     )
