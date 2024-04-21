@@ -84,9 +84,6 @@
 #add-box form div input:focus{
     outline: none;
 }
-#add-box form div #radio{
-
-}
 .button-click{
     background: linear-gradient(to right,#bec58f ,#25d1a2);
     background-color: #bec58f;
@@ -109,5 +106,20 @@
 }
 .button-click:active{
     transform: scale(0.95);
+}
+
+@media only screen and (max-width: 800px) {
+    #add-box form div select{
+        width: 25%;
+    }
+    #add-box form div textarea{
+        width: 75%;
+    }
+    #add-box form div{
+        width:90%;
+        padding-bottom: 20px;
+        
+        
+    }
 }
 
