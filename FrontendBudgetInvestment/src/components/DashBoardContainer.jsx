@@ -3,28 +3,36 @@ import DashBoardContainers from './DashboardContainers';
 import "../cssFiles/DashBoardContainers.css";
 import Button from './Button';
 import { FetchDataUserId, FetchDataUserExpenses, FetchDataUserDeposits, FetchDataUserSavings } from '../http.js';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 export default function DashBoardContainer(){
     const [userInfo,setUserInfo] = useState([]);
     const [expenses,setExpenses] = useState([]);
     const [deposits,setDeposits] = useState([]);
     const [savings,setSavings] = useState([]);
+    const isLoggedIn = sessionStorage.getItem('isLoggedIn');
     const id = sessionStorage.getItem('userId');
+    const navigate = useNavigate();
 
     useEffect(() =>{
         async function fetchData(){
-            try{
-                setUserInfo(await FetchDataUserId(id));
+        try{
+            if(isLoggedIn != 'true'){
+                navigate('/');
+                }
+            if( isLoggedIn === 'true'){
+                    setUserInfo(await FetchDataUserId(id));
 
-                setExpenses(await FetchDataUserExpenses(id));
+                    setExpenses(await FetchDataUserExpenses(id));
 
-                setDeposits(await FetchDataUserDeposits(id));
+                    setDeposits(await FetchDataUserDeposits(id));
+                    
+                    setSavings(await FetchDataUserSavings(id));
                 
-                setSavings(await FetchDataUserSavings(id));
-            }catch(e){
-                console.error(e);
             }
+        }catch(e){
+            console.error(e);
+        }
         }
         fetchData();
     }, [])

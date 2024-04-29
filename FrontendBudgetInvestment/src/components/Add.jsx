@@ -22,6 +22,15 @@ export default function Add({title, infoComponent}){
     const [successContainer,setSuccessContainer] = useState('');
     const [choiceSavings,setChoiceSavings] = useState('');
     const id = sessionStorage.getItem('userId');
+    const navigate = useNavigate();
+    useEffect(() => {
+        const isLoggedIn = sessionStorage.getItem('isLoggedIn');
+        console.log(isLoggedIn)
+        if(isLoggedIn != 'true'){
+            navigate('/');
+        }
+        }, [])
+
 
     useEffect(() => {
         const timeout= setTimeout( () => {

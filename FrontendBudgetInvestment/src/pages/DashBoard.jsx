@@ -11,10 +11,9 @@ function DashBoard(){
     const navigate = useNavigate();
     useEffect(() => {
         const isLoggedIn = sessionStorage.getItem('isLoggedIn');
-        
         if(isLoggedIn === 'false'){
             navigate('/');
-            }
+        }
         }, [])
     return(
         <> 
