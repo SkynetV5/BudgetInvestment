@@ -1,6 +1,7 @@
 import Button from "./Button";
 import Label from "./Label";
 import {useState, useEffect} from 'react';
+import { motion } from "framer-motion";
 import bcrypt from 'bcryptjs';
 import ErrorContainer from "./ErrorContainer";
 import "../cssFiles/ErrorContainer.css";
@@ -154,30 +155,30 @@ export default function RegisterContainer(){
             
          }
     };
-    
-    
+    const x = [0,-5,5,0];
+    const duration = 0.5;
 
     return <>
         {errorContainer}
         {successContainer}
-        <div id="container-register">
+        <motion.div id="container-register" initial={{opacity: 0 , y: -30}} animate={{opacity:1 , y: 0}} transition={{duration: 0.5}}>
             <form>
                 <Label>Imię</Label><br></br>
-                <input type="text" value={firstName} onChange={(e) =>setFirstName(e.target.value)} style={invalidClass.invalidFirstName ? {border: errorBorder} : null}/><br></br>
+                <motion.input type="text" value={firstName} onChange={(e) =>setFirstName(e.target.value)} animate={invalidClass.invalidFirstName ? {x: x} : null} transition={invalidClass.invalidFirstName ? {duration: duration} : null} style={invalidClass.invalidFirstName ? {border: errorBorder} : null}/><br></br>
                 <Label>Nazwisko</Label><br></br>
-                <input type="text" value={lastName} onChange={(e) =>setLastName(e.target.value)} style={invalidClass.invalidLastName ? {border: errorBorder} : null}/><br></br>
+                <motion.input  type="text" value={lastName} onChange={(e) =>setLastName(e.target.value)} animate={invalidClass.invalidLastName ? {x: x} : null} transition={invalidClass.invalidLastName ? {duration: duration} : null} style={invalidClass.invalidLastName ? {border: errorBorder} : null}/><br></br>
                 <Label>Nazwa Użytkownika</Label><br></br>
                 
-                <input type="text" value={userName} onChange={(e) =>setUserName(e.target.value)} style={isUserAlreadyOnDataBase || invalidClass.invalidUserName ? {border: errorBorder} : null}/><br></br>
+                <motion.input  type="text" value={userName} onChange={(e) =>setUserName(e.target.value)} animate={invalidClass.invalidUserName || isUserAlreadyOnDataBase ? {x: x} : null} transition={invalidClass.invalidUserName || isUserAlreadyOnDataBase ? {duration: duration} : null} style={isUserAlreadyOnDataBase || invalidClass.invalidUserName ? {border: errorBorder} : null}/><br></br>
                 <Label>Email</Label>
-                <input type="email" value={email} onChange={(e)=>setEmail(e.target.value)} style={(isEmailAlreadyOnDataBase || invalidClass.invalidEmail) ? {border: errorBorder} : null}/><br></br>
+                <motion.input  type="email" value={email} onChange={(e)=>setEmail(e.target.value)} animate={invalidClass.invalidEmail || isEmailAlreadyOnDataBase ? {x: x} : null} transition={invalidClass.invalidEmail || isEmailAlreadyOnDataBase ? {duration: duration} : null} style={(isEmailAlreadyOnDataBase || invalidClass.invalidEmail) ? {border: errorBorder} : null}/><br></br>
                 <Label>Hasło</Label>
-                <input type="password" value={noHashedpassword} onChange={(e)=>setNoHashedPassword(e.target.value)} style={invalidClass.invalidPassword ? {border: errorBorder} : null}/><br></br>
+                <motion.input  type="password" value={noHashedpassword} onChange={(e)=>setNoHashedPassword(e.target.value)} animate={invalidClass.invalidPassword ? {x: x} : null} transition={invalidClass.invalidPassword ? {duration: duration} : null} style={invalidClass.invalidPassword ? {border: errorBorder} : null}/><br></br>
                 <Label>Powtórz Hasło</Label><br></br>
-                <input type="password" value={repeatPassword} onChange={(e)=>setRepeatPassword(e.target.value)} style={invalidClass.invalidRepeatPassword ? {border: errorBorder} : null}/><br></br>
+                <motion.input  type="password" value={repeatPassword} onChange={(e)=>setRepeatPassword(e.target.value)} animate={invalidClass.invalidRepeatPassword ? {x: x} : null} transition={invalidClass.invalidRepeatPassword ? {duration: duration} : null} style={invalidClass.invalidRepeatPassword ? {border: errorBorder} : null}/><br></br>
                 <div style={{paddingLeft: "75px"}}><Button classed={"button-register"} Click={handleClick}>Zarejestruj się </Button></div>
             </form>
             
-        </div>
+        </motion.div>
     </>
 }

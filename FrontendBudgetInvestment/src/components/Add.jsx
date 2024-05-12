@@ -1,5 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 import Label from "./Label";
 import Button from "./Button";
 import ErrorContainer from "./ErrorContainer";
@@ -25,7 +26,6 @@ export default function Add({title, infoComponent}){
     const navigate = useNavigate();
     useEffect(() => {
         const isLoggedIn = sessionStorage.getItem('isLoggedIn');
-        console.log(isLoggedIn)
         if(isLoggedIn != 'true'){
             navigate('/');
         }
@@ -70,7 +70,6 @@ export default function Add({title, infoComponent}){
                 dayWithZero = dateDay;
             }
             const dateFormat = `${dateYear}-${monthWithZero}-${dayWithZero}`;
-            
             try{
                 let response;
                 let successText = '';
@@ -174,9 +173,11 @@ export default function Add({title, infoComponent}){
     
     return (
         <>
+        <AnimatePresence>
         {errorContainer}
         {successContainer}
-        <div id="add"> 
+        </AnimatePresence>
+        <motion.div id="add" initial={{opacity: 0 , x: -300}} animate={{opacity:1 , x: 0}} transition={{duration: 0.5, type: 'spring', stiffness: 150}} > 
             <h1>{title}</h1>
             <div id="add-box">
                 <form>
@@ -195,7 +196,7 @@ export default function Add({title, infoComponent}){
                     </div>
                 </form>
             </div>
-        </div>
+        </motion.div>
         </>
     )
 

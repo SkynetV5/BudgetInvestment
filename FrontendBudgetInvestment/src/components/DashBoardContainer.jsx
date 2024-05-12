@@ -1,9 +1,10 @@
-import {useState, useEffect} from 'react';
+import {useState, useEffect, useRef} from 'react';
 import DashBoardContainers from './DashboardContainers';
 import "../cssFiles/DashBoardContainers.css";
 import Button from './Button';
 import { FetchDataUserId, FetchDataUserExpenses, FetchDataUserDeposits, FetchDataUserSavings } from '../http.js';
 import { Link, useNavigate } from 'react-router-dom';
+import { motion, useInView } from 'framer-motion';
 
 export default function DashBoardContainer(){
     const [userInfo,setUserInfo] = useState([]);
@@ -77,10 +78,11 @@ export default function DashBoardContainer(){
         })
     }
 
+
     return (
         <div id="dashboard-container">
-                <h1>Dzień dobry, {username}!</h1>
-                <h3>Dzisiaj jest {currentlydate}.</h3>
+                <motion.h1 initial={{opacity: 0 , y: -60}} animate={{opacity:1 , y: 0}} transition={{duration: 0.6}}>Dzień dobry, {username}!</motion.h1>
+                <motion.h3 initial={{opacity: 0 , y: -60}} animate={{opacity:1 , y: 0}} transition={{duration: 0.6}}>Dzisiaj jest {currentlydate}.</motion.h3>
                 <DashBoardContainers id={'amount-container'} title={'Konto'} description={'Widzisz tutaj całą wartość swojego konta.'}>
                 <div id='box'>
                     <div>
