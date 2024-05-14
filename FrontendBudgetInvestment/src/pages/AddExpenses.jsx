@@ -13,7 +13,6 @@ export default function AddExpenses(){
             navigate('/');
         }
         }, [])
-
     return (
         <>
             <Menu/>

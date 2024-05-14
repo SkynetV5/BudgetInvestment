@@ -56,7 +56,7 @@ export default function Lists({title, infoComponent}){
                 <h1>{title}</h1>
                 {infoComponent === 'account' && expensesAndDepositsList.length === 0 && <p id='description'>Jak narazie nie ma tutaj żadnych wydatków.</p>}
                 {infoComponent === 'savings' && savings.length === 0 && <p id='description' >Jak narazie nie ma tutaj żadnych oszczędności.</p>}
-                {infoComponent === 'account' && expensesAndDepositsList.map((data => {
+                {infoComponent === 'account' && expensesAndDepositsList.map(((data,index) => {
                     const dateString = data.date;
                     const datePayment = moment(dateString);
                     const year = datePayment.year();
@@ -70,7 +70,7 @@ export default function Lists({title, infoComponent}){
                         amount -= data.deposits;
                     }
                     return <motion.div id='listing'
-                     key={data.id}>
+                     key={index}>
                         <motion.div id="data"  initial={{opacity: 0 , x: -30}} animate={{opacity:1 ,x : 0}}>
                             <p>Tytuł: {data.description}</p>
                             {data.hasOwnProperty('infoExpenses') ? <p>Typ: {data.infoExpenses}</p> : <p>Typ: {data.infoDeposits}</p>}
@@ -82,7 +82,7 @@ export default function Lists({title, infoComponent}){
                         </motion.div>
                     </motion.div>
                 }))}
-                 {infoComponent === 'savings' && savings.map((data => {
+                 {infoComponent === 'savings' && savings.map(((data,index) => {
                     const dateString = data.date;
                     const datePayment = moment(dateString);
                     const year = datePayment.year();
@@ -96,7 +96,7 @@ export default function Lists({title, infoComponent}){
                         amount -= data.savings;
                     }
                     return <motion.div id='listing'
-                     key={data.id}>
+                     key={index}>
                         <motion.div id="data" initial={{opacity: 0 , x: -30}} animate={{opacity:1 ,x : 0}}>
                             <p>Data: {day < 10 ? '0': ''}{day}-{month < 10 ? '0' : ''}{month}-{year}</p>
                             <b><p>{data.removeSavings ? parseFloat(amount - data.savings).toFixed(2) : parseFloat(amount  + data.savings).toFixed(2) }</p></b>
