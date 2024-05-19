@@ -117,7 +117,6 @@ export default function Add({title, infoComponent}){
                 }
                 if(response?.ok){
                     setErrorContainer(<ErrorContainer>Coś poszło nie tak! Spróbuj ponownie później.</ErrorContainer>)
-                    throw new Error("Failed");
                 }
                 else{
                     if(response?.status === undefined){

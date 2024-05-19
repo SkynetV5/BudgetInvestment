@@ -3,16 +3,23 @@ import { useState, useEffect, useRef } from 'react';
 import { motion} from 'framer-motion';
 import {FetchDataUserExpenses, FetchDataUserDeposits, FetchDataUserSavings} from '../http.js';
 import moment from 'moment';
+import ErrorContainer from './ErrorContainer.jsx';
 
 export default function Lists({title, infoComponent}){
     const id = sessionStorage.getItem('userId');
     const [expenses,setExpenses] = useState([]);
     const [deposits,setDeposits] = useState([]);
     const [savings, setSavings] = useState([]);
+    const [isFetching, setIsFetching] = useState(false);
+    const [errorComponent,setErrorComponent] = useState('');
+    const [isError,setIsError] = useState(false);
+
+    const loadingText = "Wczytuję dane...";
     
     useEffect(() => {
         async function FetchData(){
             try{
+            setIsFetching(true);
             if(infoComponent === 'account'){
                 setExpenses(await FetchDataUserExpenses(id));
                 setDeposits(await FetchDataUserDeposits(id));
@@ -20,8 +27,11 @@ export default function Lists({title, infoComponent}){
             if(infoComponent === 'savings'){
                 setSavings(await FetchDataUserSavings(id));
             }
+            setIsFetching(false);
             }
             catch(e){
+                setErrorComponent(<ErrorContainer>Błąd w pobieraniu danych. Spróbuj ponownie później</ErrorContainer>)
+                setIsError(true);
             }
         }
         FetchData();
@@ -52,11 +62,14 @@ export default function Lists({title, infoComponent}){
     }
 
     return(
-        <motion.div id="lists" initial={{opacity: 0 , y: -60}} animate={{opacity:1 , y: 0}} transition={{duration: 0.5, type: 'spring', stiffness: 100}}>
+        <>
+        {isError && errorComponent}
+        {!isError && <motion.div id="lists" initial={{opacity: 0 , y: -60}} animate={{opacity:1 , y: 0}} transition={{duration: 0.5, type: 'spring', stiffness: 100}}>
                 <h1>{title}</h1>
-                {infoComponent === 'account' && expensesAndDepositsList.length === 0 && <p id='description'>Jak narazie nie ma tutaj żadnych wydatków.</p>}
-                {infoComponent === 'savings' && savings.length === 0 && <p id='description' >Jak narazie nie ma tutaj żadnych oszczędności.</p>}
-                {infoComponent === 'account' && expensesAndDepositsList.map(((data,index) => {
+                {isFetching && <p id='description'>{loadingText}</p>}
+                {!isFetching && infoComponent === 'account' && expensesAndDepositsList.length === 0 && <p id='description'>Jak narazie nie ma tutaj żadnych wydatków.</p>}
+                {!isFetching &&  infoComponent === 'savings' && savings.length === 0 && <p id='description' >Jak narazie nie ma tutaj żadnych oszczędności.</p>}
+                {!isFetching &&  infoComponent === 'account' && expensesAndDepositsList.map(((data,index) => {
                     const dateString = data.date;
                     const datePayment = moment(dateString);
                     const year = datePayment.year();
@@ -82,7 +95,7 @@ export default function Lists({title, infoComponent}){
                         </motion.div>
                     </motion.div>
                 }))}
-                 {infoComponent === 'savings' && savings.map(((data,index) => {
+                 {!isFetching &&  infoComponent === 'savings' && savings.map(((data,index) => {
                     const dateString = data.date;
                     const datePayment = moment(dateString);
                     const year = datePayment.year();
@@ -106,6 +119,7 @@ export default function Lists({title, infoComponent}){
                         </motion.div>
                     </motion.div>
                 }))}
-        </motion.div>
+        </motion.div>}
+        </>
     )
 }
