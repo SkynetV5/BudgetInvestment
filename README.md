@@ -1,5 +1,5 @@
 # BudgetInvestment
-Web App do zarządzania finansami React + Java - Framework Spring Boot
+Web App do zarządzania finansami React + Java Spring Boot
 
 ![login](https://github.com/SkynetV5/BudgetInvestment/assets/102437351/74219331-4b19-4488-873e-5ded0414d145)
 ![dashboard](https://github.com/SkynetV5/BudgetInvestment/assets/102437351/72644731-b9da-4db9-864b-f5eb5ebef682)
