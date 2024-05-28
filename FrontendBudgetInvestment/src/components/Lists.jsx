@@ -99,7 +99,7 @@ export default function Lists({title, infoComponent}){
                     const dateString = data.date;
                     const datePayment = moment(dateString);
                     const year = datePayment.year();
-                    const day = datePayment.day();
+                    const day = datePayment.date();
                     const month = datePayment.month() + 1;
                     if(data.removeSavings){
 

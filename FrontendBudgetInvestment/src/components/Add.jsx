@@ -162,7 +162,7 @@ export default function Add({title, infoComponent}){
         dataForm = <>
         <div>
         <Label>Wybierz:</Label><br></br>
-        <Label id="radio-container"><input type="radio" value='add' name="choice" id="radio"  onChange={(e) => setChoiceSavings(e.target.value)}/>
+        <Label id="radio-container"><input type="radio" value='add' name="choice" id="radio" defaultChecked onChange={(e) => setChoiceSavings(e.target.value)}/>
         Dodaj</Label><br></br>
         <Label id="radio-container"><input type="radio" value='remove' name="choice"  id="radio" onChange={(e) => setChoiceSavings(e.target.value)}/>
         Usuń</Label>
