@@ -48,7 +48,7 @@ export default function Menu(){
             <motion.div whileHover={{scale: 1.1}} animate={{opacity: [0,0.5,1]}}><Link to='/dashboard'>DashBoard</Link></motion.div>
             <motion.div whileHover={{scale: 1.1}} animate={{opacity: [0,0.5,1]}}><Link to='/account'>Konto</Link></motion.div>
             <motion.div whileHover={{scale: 1.1}} animate={{opacity: [0,0.5,1]}}><Link to='/savings'>Oszczędności</Link></motion.div>
-            <motion.div whileHover={{scale: 1.1}} animate={{opacity: [0,0.5,1]}}><Link>Profil</Link></motion.div>
+            <motion.div whileHover={{scale: 1.1}} animate={{opacity: [0,0.5,1]}}><Link to='/profile'>Profil</Link></motion.div>
             <motion.div animate={{opacity: [0,0.5,1]}}><Button classed="button-logout" Click={handleClickLogout}>Wyloguj</Button></motion.div>
             </motion.div>
         }
@@ -61,7 +61,7 @@ export default function Menu(){
         <motion.div whileHover={{scale: 1.1}}><Link to='/dashboard'>DashBoard</Link></motion.div>
         <motion.div whileHover={{scale: 1.1}}><Link to='/account'>Konto</Link></motion.div>
         <motion.div whileHover={{scale: 1.1}}><Link to='/savings'>Oszczędności</Link></motion.div>
-        <motion.div whileHover={{scale: 1.1}}><Link>Profil</Link></motion.div>
+        <motion.div whileHover={{scale: 1.1}}><Link to='/profile'>Profil</Link></motion.div>
         <motion.div><Button classed="button-logout" Click={handleClickLogout}>Wyloguj</Button></motion.div>
         </>
        

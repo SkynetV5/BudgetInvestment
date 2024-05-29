@@ -1,0 +1,44 @@
+#profile{
+    width: 40%;
+    min-height: 300px;
+    background-color: antiquewhite;
+    margin-left: auto;
+    margin-right: auto;
+    padding-bottom: 40px;
+    margin-bottom: 40px;
+    color:#209E86;
+    text-align: center;
+    border-radius: 3px;
+
+}
+#profile h1{
+    padding-top: 20px;
+
+}
+#profile #data{
+    border-top: solid 1px #209E86;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: left;
+    padding-top: 20px;
+    width: 70%;
+    min-height: 300px;
+}
+
+#data p{
+    font-size: 20px;
+    padding-bottom: 20px;
+}
+
+
+@media only screen and (max-width: 700px) {
+    #profile{
+        width: 80%;
+    }
+    
+}
+@media only screen and (min-width: 701px) and (max-width: 900px){
+    #profile{
+        width: 60%;
+    }
+}

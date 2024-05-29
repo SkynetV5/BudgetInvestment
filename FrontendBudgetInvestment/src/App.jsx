@@ -11,6 +11,7 @@ import AddDeposits from './pages/AddDeposits'
 import AddRemoveSavings from './pages/AddRemoveSavings'
 import Account from './pages/Account'
 import Savings from './pages/Savings'
+import Profile from './pages/Profile'
 
 function App() {
   
@@ -25,6 +26,7 @@ function App() {
       { path: '/addRemoveSavings', element: <AddRemoveSavings/>},
       { path: '/account', element: <Account/>},
       { path: '/savings', element: <Savings/>},
+      { path: '/profile', element: <Profile/>},
       { path: '*', element: <NotFoundPage/>}
     ]
   )
